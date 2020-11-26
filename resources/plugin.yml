@@ -1,0 +1,6 @@
+main: fr.charlito33.skriptutils.SkriptUtils
+name: SkriptUtils
+version: 0.1-beta
+author: Charlito33
+description: Skript Addon
+depend: [Skript]
