@@ -3,8 +3,8 @@ package fr.charlito33.skriptutils;
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.ExpressionType;
 import com.bringholm.nametagchanger.NameTagChanger;
-import fr.charlito33.skriptutils.conditions.CondIsNameHidden;
-import fr.charlito33.skriptutils.conditions.CondIsNameVisible;
+import fr.charlito33.skriptutils.conditions.CondIsTagHidden;
+import fr.charlito33.skriptutils.conditions.CondIsTagChanged;
 import fr.charlito33.skriptutils.effects.EffChangePlayerTag;
 import fr.charlito33.skriptutils.effects.EffHidePlayerTag;
 import fr.charlito33.skriptutils.effects.EffResetPlayerTag;
@@ -30,8 +30,9 @@ public class SkriptUtils extends JavaPlugin {
         Skript.registerEffect(EffResetPlayerTag.class, "reset [the] (tag|name)[s] of %players%", "reset [the] %players%['s] (tag|name)[s]");
 
         //Register Conditions
-        Skript.registerCondition(CondIsNameVisible.class, "[the] %players%['s] (tag|name)[s] (is|are) visible[s]", "[the] (tag|name)[s] of %players% (is|are) visible[s]");
-        Skript.registerCondition(CondIsNameHidden.class, "[the] %players%['s] (tag|name)[s] (is|are) hidden[s]", "[the] (tag|name)[s] of %players% (is|are) hidden[s]");
+        Skript.registerCondition(CondIsTagChanged.class, "[the] %players%['s] (tag|name)[s] (is|are) visible[s]", "[the] (tag|name)[s] of %players% (is|are) visible[s]");
+        Skript.registerCondition(CondIsTagHidden.class, "[the] %players%['s] (tag|name)[s] (is|are) hidden[s]", "[the] (tag|name)[s] of %players% (is|are) hidden[s]");
+        Skript.registerCondition(CondIsTagChanged.class, "[the] %players%['s] (tag|name)[s] (is|are) changed", "[the] (tag|name)[s] of %players% (is|are) changed");
 
         //Register Expressions
         Skript.registerExpression(ExprPlayerTag.class, String.class, ExpressionType.PROPERTY, "[the] %player%['s] (tag|name)", "[the] (tag|name) of %player%");

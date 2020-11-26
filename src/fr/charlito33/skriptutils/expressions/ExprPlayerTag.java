@@ -36,7 +36,7 @@ public class ExprPlayerTag extends SimpleExpression<String> {
 
     @Override
     public String toString(Event e, boolean b) {
-        return "tag of player";
+        return "player's tag";
     }
 
     @Override

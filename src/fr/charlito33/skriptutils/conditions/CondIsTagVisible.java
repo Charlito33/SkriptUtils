@@ -10,27 +10,27 @@ import org.bukkit.event.Event;
 
 import javax.annotation.Nullable;
 
-public class CondIsNameVisible extends Condition {
-    private Expression<Player> player;
+public class CondIsTagVisible extends Condition {
+    private Expression<Player> players;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expr, int i, Kleenean kl, SkriptParser.ParseResult pr) {
-        player = (Expression<Player>) expr[0];
+        players = (Expression<Player>) expr[0];
 
         return true;
     }
 
     @Override
     public String toString(@Nullable Event e, boolean b) {
-        return "%players%'s name is visible";
+        return "%players%'s tag is visible";
     }
 
     @Override
     public boolean check(Event e) {
         boolean visible = true;
 
-        for (Player lPlayer : player.getAll(e)) {
+        for (Player lPlayer : players.getAll(e)) {
             if (SkriptUtils.scoreboard.getTeam("nameHidden").hasEntry(lPlayer.getName())) {
                 visible = false;
                 break;

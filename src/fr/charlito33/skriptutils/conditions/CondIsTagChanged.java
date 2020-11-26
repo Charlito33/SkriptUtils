@@ -1,6 +1,6 @@
-package fr.charlito33.skriptutils.effects;
+package fr.charlito33.skriptutils.conditions;
 
-import ch.njol.skript.lang.Effect;
+import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
@@ -11,8 +11,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-public class EffResetPlayerTag extends Effect {
+import javax.annotation.Nullable;
 
+public class CondIsTagChanged extends Condition {
     private Expression<Player> players;
 
     @SuppressWarnings("unchecked")
@@ -24,18 +25,26 @@ public class EffResetPlayerTag extends Effect {
     }
 
     @Override
-    public String toString(Event event, boolean b) {
-        return "reset %players%'s tag";
+    public String toString(@Nullable Event e, boolean b) {
+        return "%players%'s tag changed";
     }
 
     @Override
-    protected void execute(Event e) {
+    public boolean check(Event e) {
         if (Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
+            boolean changed = true;
+
             for (Player lPlayer : players.getAll(e)) {
-                NameTagChanger.INSTANCE.resetPlayerName(lPlayer);
+                if (NameTagChanger.INSTANCE.getChangedName(lPlayer) == null) {
+                    changed = false;
+                }
             }
+
+            return changed;
         } else {
             Logger.info(ChatColor.RED + "You cannot use '" + this.toString(e, false) + "' because you don't have ProtocolLib installed/enabled !");
+
+            return false;
         }
     }
 }

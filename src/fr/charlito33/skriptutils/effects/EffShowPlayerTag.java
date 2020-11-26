@@ -11,12 +11,12 @@ import org.bukkit.event.Event;
 import javax.annotation.Nullable;
 
 public class EffShowPlayerTag extends Effect {
-    private Expression<Player> player;
+    private Expression<Player> players;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expr, int matchedPattern, Kleenean paramKleenean, SkriptParser.ParseResult paramParseResult) {
-        player = (Expression<Player>) expr[0];
+        players = (Expression<Player>) expr[0];
 
         return true;
     }
@@ -28,7 +28,7 @@ public class EffShowPlayerTag extends Effect {
 
     @Override
     protected void execute(Event e) {
-        for (Player lPlayer : player.getAll(e)) {
+        for (Player lPlayer : players.getAll(e)) {
             if (SkriptUtils.scoreboard.getTeam("nameHidden").hasEntry(lPlayer.getName())) {
                 SkriptUtils.scoreboard.getTeam("nameHidden").removeEntry(lPlayer.getName());
             }

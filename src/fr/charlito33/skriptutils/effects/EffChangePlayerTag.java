@@ -13,13 +13,13 @@ import org.bukkit.event.Event;
 
 public class EffChangePlayerTag extends Effect {
 
-    private Expression<Player> player;
+    private Expression<Player> players;
     private Expression<String> name;
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean init(Expression<?>[] expr, int i, Kleenean kl, SkriptParser.ParseResult pr) {
-        player = (Expression<Player>) expr[0];
+        players = (Expression<Player>) expr[0];
         name = (Expression<String>) expr[1];
 
         return true;
@@ -33,7 +33,7 @@ public class EffChangePlayerTag extends Effect {
     @Override
     protected void execute(Event e) {
         if (Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
-            for (Player lPlayer : player.getAll(e)) {
+            for (Player lPlayer : players.getAll(e)) {
                 NameTagChanger.INSTANCE.changePlayerName(lPlayer, name.getSingle(e));
             }
         } else {
