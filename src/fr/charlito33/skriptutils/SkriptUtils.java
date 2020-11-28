@@ -3,6 +3,7 @@ package fr.charlito33.skriptutils;
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.ExpressionType;
 import com.bringholm.nametagchanger.NameTagChanger;
+import fr.charlito33.skriptutils.httputils.HTTPUtils;
 import fr.charlito33.skriptutils.conditions.CondIsTagHidden;
 import fr.charlito33.skriptutils.conditions.CondIsTagChanged;
 import fr.charlito33.skriptutils.effects.EffChangePlayerTag;
@@ -22,6 +23,9 @@ public class SkriptUtils extends JavaPlugin {
     public void onEnable() {
         //Register Skript Addon
         Skript.registerAddon(this);
+
+        //Send Enable to other classes
+        HTTPUtils.register();
 
         //Register Effects
         Skript.registerEffect(EffHidePlayerTag.class, "hide [the] %players%['s] (tag|name)[s]", "hide [the] (tag|name)[s] of %players%");
